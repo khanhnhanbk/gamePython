@@ -1,4 +1,6 @@
 import pygame
+from pygame import key
+from pygame.constants import K_KP_ENTER, K_SPACE
 
 
 class Board:
@@ -54,3 +56,20 @@ class Board:
 
         text = font.render("Level Up", 1, (0, 0, 255))
         self.win.blit(text, (self.size[0] // 2 - 100, self.size[1] // 2))
+
+    def showHelp(self):
+        run = True
+        while run:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    run = False
+            self.draw()
+            text = pygame.font.SysFont("comicsans", 50, True).render(
+                "Help", 1, (0, 0, 255)
+            )
+            self.win.blit(text, (self.size[0] // 2 - 100, self.size[1] // 2))
+            keys = pygame.key.get_pressed()
+            if keys[K_SPACE]:
+                break
+            pygame.display.update()
+            pygame.time.delay(50)
